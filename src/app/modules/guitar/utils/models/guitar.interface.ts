@@ -4,6 +4,6 @@ export interface Guitar {
   type: string;
   price: number;
   description: string;
-  feature: string;
+  features: string;
   indicatedLevel: string;
 }

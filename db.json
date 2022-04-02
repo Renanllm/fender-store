@@ -1,8 +1,20 @@
 {
   "users": [
-    { "id": 1, "username": "renan", "password": "123456" },
-    { "id": 2, "username": "renaly", "password": "654321" },
-    { "id": 3, "username": "haniel", "password": "111222" }
+    {
+      "id": 1,
+      "username": "renan",
+      "password": "123456"
+    },
+    {
+      "id": 2,
+      "username": "renaly",
+      "password": "654321"
+    },
+    {
+      "id": 3,
+      "username": "haniel",
+      "password": "111222"
+    }
   ],
   "guitars": [
     {
@@ -31,6 +43,15 @@
       "description": "description here",
       "features": "features here",
       "indicatedLevel": "Iniciante"
+    },
+    {
+      "name": "TAGIMA TALAS ",
+      "type": "FOLK",
+      "price": 2950,
+      "description": "NOVA BLASTER",
+      "features": "FEATURE TOP",
+      "indicatedLevel": "Iniciante",
+      "id": 4
     }
   ]
 }
