@@ -7,9 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: GuitarListComponent,
+    data: { reload: 'true' },
   },
   {
-    path: ':id',
+    path: 'form',
+    component: GuitarFormComponent,
+  },
+  {
+    path: 'form/:id',
     component: GuitarFormComponent,
   },
 ];

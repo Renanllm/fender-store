@@ -18,13 +18,13 @@
   ],
   "guitars": [
     {
-      "id": 1,
       "name": "GEORGE HARRISON ROSEWOOD",
       "type": "TELECASTER",
       "price": 5000,
       "description": "description here",
       "features": "features here",
-      "indicatedLevel": "Intermediário"
+      "indicatedLevel": "Intermediário",
+      "id": 1
     },
     {
       "id": 2,
@@ -43,15 +43,6 @@
       "description": "description here",
       "features": "features here",
       "indicatedLevel": "Iniciante"
-    },
-    {
-      "name": "TAGIMA TALAS ",
-      "type": "FOLK",
-      "price": 2950,
-      "description": "NOVA BLASTER",
-      "features": "FEATURE TOP",
-      "indicatedLevel": "Iniciante",
-      "id": 4
     }
   ]
 }

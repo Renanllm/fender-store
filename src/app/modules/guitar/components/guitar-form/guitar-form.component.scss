@@ -1,10 +1,17 @@
-.submit-container {
+.buttons-container {
   margin-top: 1rem;
   width: 100%;
   display: flex;
-  justify-content: center;
 
-  .submit-button {
-    width: 60%;
+  .main-button {
+    width: 45%;
   }
+
+  .secondary-button {
+    width: 45%;
+  }
+}
+
+.content-wrapper {
+  text-align: center;
 }
