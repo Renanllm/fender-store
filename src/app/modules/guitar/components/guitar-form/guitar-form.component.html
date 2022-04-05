@@ -1,73 +1,73 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Guitarras</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Guitarras</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Criação - Guitarras 🎸</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Criação - Guitarras 🎸</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-    <ion-item>
-      <ion-label position="floating">Name</ion-label>
-      <ion-input type="text" formControlName="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Tipo:</ion-label>
-      <ion-input type="text" formControlName="type"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Preço:</ion-label>
-      <ion-input type="number" formControlName="price"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Descrição:</ion-label>
-      <ion-input type="text" formControlName="description"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Features</ion-label>
-      <ion-input type="text" formControlName="features"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Nível recomendado:</ion-label>
-      <ion-input type="text" formControlName="indicatedLevel"></ion-input>
-    </ion-item>
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+        <ion-item>
+            <ion-label position="floating">Name:</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Tipo:</ion-label>
+            <ion-input type="text" formControlName="type"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Preço:</ion-label>
+            <ion-input type="number" formControlName="price"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Descrição:</ion-label>
+            <ion-input type="text" formControlName="description"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Features</ion-label>
+            <ion-input type="text" formControlName="features"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Nível recomendado:</ion-label>
+            <ion-input type="text" formControlName="indicatedLevel"></ion-input>
+        </ion-item>
 
-    <div class="buttons-container" [ngStyle]="{'justify-content': guitar?.id ? 'space-around' : 'center'}">
-      <ion-button class="secondary-button" color="danger" *ngIf="guitar?.id" (click)="openConfirmDeleteModal()">Deletar
-      </ion-button>
-      <ion-button class="main-button" type="submit" [disabled]="!form.valid" color="tertiary">Submeter
-      </ion-button>
-    </div>
-  </form>
+        <div class="buttons-container" [ngStyle]="{'justify-content': guitar?.id ? 'space-around' : 'center'}">
+            <ion-button class="secondary-button" color="danger" *ngIf="guitar?.id" (click)="openConfirmDeleteModal()">Deletar
+            </ion-button>
+            <ion-button class="main-button" type="submit" [disabled]="!form.valid" color="tertiary">Submeter
+            </ion-button>
+        </div>
+    </form>
 </ion-content>
 
 <ion-modal [isOpen]="isConfirmDeleteModalOpen" [breakpoints]="[0, 0.2, 0.5, 1]" [initialBreakpoint]="0.5">
-  <ng-template>
-    <ion-header translucent>
-      <ion-toolbar>
-        <ion-title>Confirmação</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content fullscreen>
-      <div class="content-wrapper">
-        <h6>Você quer realmente deletar esse item?</h6>
+    <ng-template>
+        <ion-header translucent>
+            <ion-toolbar>
+                <ion-title>Confirmação</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content fullscreen>
+            <div class="content-wrapper">
+                <h6>Você quer realmente deletar esse item?</h6>
 
-        <div class="buttons-container" [ngStyle]="{'justify-content': guitar?.id ? 'space-around' : 'center'}">
-          <ion-button class="secondary-button" color="danger" (click)="dismissModal()">
-            Cancelar
-          </ion-button>
-          <ion-button class="main-button" color="tertiary" (click)="handleDeleteClick()">Confirmar
-          </ion-button>
-        </div>
-      </div>
-    </ion-content>
-  </ng-template>
+                <div class="buttons-container" [ngStyle]="{'justify-content': guitar?.id ? 'space-around' : 'center'}">
+                    <ion-button class="secondary-button" color="danger" (click)="dismissModal()">
+                        Cancelar
+                    </ion-button>
+                    <ion-button class="main-button" color="tertiary" (click)="handleDeleteClick()">Confirmar
+                    </ion-button>
+                </div>
+            </div>
+        </ion-content>
+    </ng-template>
 </ion-modal>
