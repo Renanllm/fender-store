@@ -14,12 +14,14 @@
           <ion-col>
             <ion-list inset>
 
-              <ion-item>
-                <ion-input type="text" placeholder="Username" formControlName="username" required></ion-input>
+              <ion-item lines="full">
+                <ion-label position="floating">Username</ion-label>
+                <ion-input type="text" formControlName="username" required></ion-input>
               </ion-item>
 
               <ion-item>
-                <ion-input type="password" placeholder="Password" formControlName="password" required></ion-input>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" formControlName="password" required></ion-input>
               </ion-item>
 
             </ion-list>
@@ -28,7 +30,7 @@
 
         <ion-row>
           <ion-col class="signup-col">
-            <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</button>
+            <ion-button ion-button class="submit-btn" full type="submit" color="danger" [disabled]="!loginForm.form.valid">Login</ion-button>
           </ion-col>
         </ion-row>
 
