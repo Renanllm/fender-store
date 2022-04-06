@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "fender-store",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

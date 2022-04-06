@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "renan",
+      "password": "123456"
+    },
+    {
+      "id": 2,
+      "username": "renaly",
+      "password": "654321"
+    },
+    {
+      "id": 3,
+      "username": "haniel",
+      "password": "111222"
+    }
+  ],
+  "guitars": [
+    {
+      "name": "GEORGE HARRISON ROSEWOOD",
+      "type": "TELECASTER",
+      "price": 5000,
+      "description": "description here",
+      "features": "features here",
+      "indicatedLevel": "Intermediário",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "AMERICAN STRATE",
+      "type": "STRATOCASTER",
+      "price": 12000,
+      "description": "description here",
+      "features": "features here",
+      "indicatedLevel": "Profissional"
+    },
+    {
+      "id": 3,
+      "name": "ROAD WORN® '60S",
+      "type": "JAZZMASTER",
+      "price": 3000,
+      "description": "description here",
+      "features": "features here",
+      "indicatedLevel": "Iniciante"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "fender-store",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
