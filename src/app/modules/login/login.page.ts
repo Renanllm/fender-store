@@ -1,11 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { User } from './user.interface';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +12,16 @@ import { User } from './user.interface';
 })
 export class LoginPage implements OnInit {
   form: FormGroup;
-  user: User
+  user: User;
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router, private alertController: AlertController) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private alertController: AlertController,
+    private userService: UserService
+  ) {
+    userService.logout();
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -27,7 +32,7 @@ export class LoginPage implements OnInit {
       cssClass: 'my-custom-class',
       header: 'Algo de errado não está certo!',
       message: 'Usuário ou senha inválidos.',
-      buttons: ['Fechar']
+      buttons: ['Fechar'],
     });
     await alert.present();
   }
@@ -39,24 +44,22 @@ export class LoginPage implements OnInit {
     });
   }
 
-  findUser(username: string): Observable<User> {
-    return this.http.get<User>(`${environment.baseUrl}/users?username=${username}`);
-  }
-
   login() {
     if (this.form.valid) {
       const payload = this.form.value;
 
-    this.findUser(payload.username).subscribe(user => {
-      if(user[0]?.username === undefined || payload.username != user[0]?.username) {
-        this.presentAlert()
-      } else if (user[0]?.password === undefined || payload.password != user[0]?.password) {
-        this.presentAlert()
-      } else {
-        this.router.navigate([`guitarras/`]);
-      }
-    });
-  }
-  }
+      this.userService.find(payload).subscribe((users) => {
+        if (users.length === 0) {
+          this.form.reset();
+          this.presentAlert();
+          return;
+        }
 
+        const user = users[0];
+
+        this.userService.login(user);
+        this.router.navigate([`guitarras/`]);
+      });
+    }
+  }
 }

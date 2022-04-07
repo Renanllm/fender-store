@@ -1,15 +1,17 @@
-<ion-card [button]="true" type="button" (click)="handleGuitarClick()">
-  <img src="../../../../../assets/guitars/guitar.webp" [alt]="guitar?.name">
-  <ion-card-header>
-    <ion-card-subtitle>{{ guitar?.type }} - {{ formatGuitarPrice(guitar?.price) }} - {{ guitar?.indicatedLevel }}
-    </ion-card-subtitle>
-    <ion-card-title>{{ guitar?.name }}</ion-card-title>
-  </ion-card-header>
+<div class="wrapper">
+  <ion-card [button]="true" type="button" (click)="handleGuitarClick()">
+    <img src="../../../../../assets/guitars/guitar.webp" [alt]="guitar?.name">
+    <ion-card-header>
+      <ion-card-subtitle>{{ guitar?.type }} - {{ formatGuitarPrice(guitar?.price) }} - {{ guitar?.indicatedLevel }}
+      </ion-card-subtitle>
+      <ion-card-title>{{ guitar?.name }}</ion-card-title>
+    </ion-card-header>
 
-  <ion-card-content>
-    Descrição: {{ guitar?.description }}
-    <br>
-    Features: {{ guitar?.features }}
-    <br>
-  </ion-card-content>
-</ion-card>
+    <ion-card-content>
+      Descrição: {{ guitar?.description }}
+      <br>
+      Features: {{ guitar?.features }}
+      <br>
+    </ion-card-content>
+  </ion-card>
+</div>

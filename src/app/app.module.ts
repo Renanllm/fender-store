@@ -1,18 +1,16 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginPageModule } from './login/login.module';
+import { AppComponent } from './app.component';
+import { PersonalDatasComponent } from './components/personal-datas/personal-datas.component';
+import { LoginPageModule } from './modules/login/login.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PersonalDatasComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -21,7 +19,7 @@ import { LoginPageModule } from './login/login.module';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    LoginPageModule
+    LoginPageModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

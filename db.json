@@ -3,17 +3,29 @@
     {
       "id": 1,
       "username": "renan",
-      "password": "123456"
+      "password": "123456",
+      "cpf": "111.222.333-44",
+      "birthDate": "2001-05-29",
+      "name": "renan",
+      "address": "rua das ruas"
     },
     {
       "id": 2,
       "username": "renaly",
-      "password": "654321"
+      "password": "654321",
+      "cpf": "111.222.333-44",
+      "birthDate": "2000-05-29",
+      "name": "renaly",
+      "address": "rua das ruas"
     },
     {
       "id": 3,
       "username": "haniel",
-      "password": "111222"
+      "password": "111222",
+      "cpf": "111.222.333-44",
+      "birthDate": "1987-05-29",
+      "name": "haniel",
+      "address": "rua das ruas"
     }
   ],
   "guitars": [
@@ -36,13 +48,13 @@
       "indicatedLevel": "Profissional"
     },
     {
-      "id": 3,
       "name": "ROAD WORN® '60S",
       "type": "JAZZMASTER",
-      "price": 3000,
+      "price": 7867,
       "description": "description here",
       "features": "features here",
-      "indicatedLevel": "Iniciante"
+      "indicatedLevel": "Iniciante",
+      "id": 3
     }
   ]
 }

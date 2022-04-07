@@ -8,8 +8,6 @@ import { Guitar } from '../utils/models/guitar.interface';
   providedIn: 'root',
 })
 export class GuitarService {
-  // xpto = new BehaviorSubject({});
-
   constructor(private http: HttpClient) {}
 
   findAll(): Observable<Guitar[]> {

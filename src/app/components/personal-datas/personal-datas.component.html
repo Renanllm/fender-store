@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dados Cadastrais</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Dados Cadastrais 👨🏻‍💻</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="wrapper">
+    <ion-card>
+      <img [src]="userImageSrc" [alt]="user?.name">
+      <ion-card-header>
+        <ion-card-subtitle>{{ getUserAge() }} anos
+        </ion-card-subtitle>
+        <ion-card-title>{{ user?.name }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        CPF: {{user?.cpf}}
+        <br>
+        Endereço: {{user?.address}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
