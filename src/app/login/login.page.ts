@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from './user.interface';
 
@@ -24,15 +25,11 @@ export class LoginPage implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Algo de errado não está certo',
+      header: 'Algo de errado não está certo!',
       message: 'Usuário ou senha inválidos.',
-      buttons: ['OK']
+      buttons: ['Fechar']
     });
-
     await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 
   buildForm() {
@@ -42,8 +39,8 @@ export class LoginPage implements OnInit {
     });
   }
 
-  findUser(username: string) {
-    return this.http.get(`${environment.baseUrl}/users?username=${username}`);
+  findUser(username: string): Observable<User> {
+    return this.http.get<User>(`${environment.baseUrl}/users?username=${username}`);
   }
 
   login() {
