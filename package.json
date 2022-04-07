@@ -9,8 +9,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
+    "e2e": "ng e2e",
+    "json-server": "json-server --watch db.json",
+    "unix-server": "json-server --watch db.json & ng serve",
+    "windows-server": "start npm run json-server & start npm start"
+    },
   "private": true,
   "dependencies": {
     "@angular/common": "~13.2.2",
