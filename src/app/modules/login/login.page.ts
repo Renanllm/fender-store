@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { User } from './user.interface';
-import { UserService } from './user.service';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,54 +11,69 @@ import { UserService } from './user.service';
 })
 export class LoginPage implements OnInit {
   form: FormGroup;
-  user: User;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private alertController: AlertController,
-    private userService: UserService
+    private authService: AuthService,
+    private loadingController: LoadingController
   ) {
-    userService.logout();
   }
+
+  get email() {
+    return this.form.get('emial');
+  };
+
+  get password() {
+    return this.form.get('password');
+  };
 
   ngOnInit() {
-    this.buildForm();
-  }
+    this.form = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  };
 
-  async presentAlert() {
+  async register() {
+    
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    console.log(this.form.value);
+    
+    const user = await this.authService.register(this.form.value);
+    await loading.dismiss();
+
+    if (user) {
+      this.router.navigate([`guitarras/`]);
+    } else {
+      this.showAlert('Registration failed', 'Please thy again!');
+    }
+  };
+
+  async login() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    const user = await this.authService.login(this.form.value);
+    await loading.dismiss();
+
+    if (user) {
+      this.router.navigate(['guitarras/']);
+    } else {
+      this.showAlert('Login failed', 'Please thy again!');
+    }
+  };
+
+  async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Algo de errado não está certo!',
-      message: 'Usuário ou senha inválidos.',
-      buttons: ['Fechar'],
+      header,
+      message,
+      buttons: ['OK'],
     });
     await alert.present();
-  }
+  };
 
-  buildForm() {
-    this.form = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-    });
-  }
-
-  login() {
-    if (this.form.valid) {
-      const payload = this.form.value;
-
-      this.userService.find(payload).subscribe((users) => {
-        if (users.length === 0) {
-          this.form.reset();
-          this.presentAlert();
-          return;
-        }
-
-        const user = users[0];
-
-        this.userService.login(user);
-        this.router.navigate([`guitarras/`]);
-      });
-    }
-  }
 }

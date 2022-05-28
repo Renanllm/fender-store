@@ -12,16 +12,16 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  find({ username, password }): Observable<User[]> {
+  find({ email, password }): Observable<User[]> {
     return this.http.get<User[]>(
-      `${environment.baseUrl}/users?username=${username}&password=${password}`
+      `${environment.baseUrl}/users?email=${email}&password=${password}`
     );
   }
 
   login(user: User) {
     localStorage.setItem(
       'token',
-      btoa(JSON.stringify(`token-to-${user.username}`))
+      btoa(JSON.stringify(`token-to-${user.email}`))
     );
     localStorage.setItem('user', JSON.stringify(user));
     this.updateUserLogged();

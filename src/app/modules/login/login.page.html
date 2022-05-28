@@ -11,8 +11,8 @@
     <div class="login-box">
         <form [formGroup]="form" (ngSubmit)="login()" #loginForm="ngForm">
             <ion-item lines="full">
-                <ion-label position="floating">Username</ion-label>
-                <ion-input type="text" formControlName="username" required></ion-input>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="text" formControlName="email" required></ion-input>
             </ion-item>
 
             <ion-item lines="full">
@@ -21,6 +21,7 @@
             </ion-item>
 
             <ion-button class="button" full type="submit" color="danger" [disabled]="!loginForm.form.valid">Login</ion-button>
+            <ion-button class="button" full type="submit" color="primary" (click)="register()">Create account</ion-button>
         </form>
     </div>
 </ion-content>
