@@ -17,7 +17,6 @@ export class AuthService {
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       return user;
-      
     } catch (e) {
       return null;
     }

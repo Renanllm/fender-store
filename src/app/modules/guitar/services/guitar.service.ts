@@ -1,37 +1,29 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import {
+  AngularFirestore,
+  DocumentReference
+} from '@angular/fire/compat/firestore';
 import { Guitar } from '../utils/models/guitar.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GuitarService {
-  constructor(private http: HttpClient) {}
+  constructor(private firestore: AngularFirestore) {}
 
-  findAll(): Observable<Guitar[]> {
-    return this.http.get<Guitar[]>(`${environment.baseUrl}/guitars`);
+  findAllListen() {
+    return this.firestore.collection<Guitar>('/Guitars/').snapshotChanges();
   }
 
-  find(guitarId: number): Observable<Guitar> {
-    return this.http.get<Guitar>(`${environment.baseUrl}/guitars/${guitarId}`);
+  create(payload: Omit<Guitar, 'id'>): Promise<DocumentReference> {
+    return this.firestore.collection('/Guitars/').add(payload);
   }
 
-  create(payload: Omit<Guitar, 'id'>): Observable<Guitar> {
-    return this.http.post<Guitar>(`${environment.baseUrl}/guitars`, payload);
+  update(payload: Omit<Guitar, 'id'>, guitarId: string) {
+    return this.firestore.doc('/Guitars/' + guitarId).update(payload);
   }
 
-  update(payload: Omit<Guitar, 'id'>, guitarId: number): Observable<Guitar> {
-    return this.http.put<Guitar>(
-      `${environment.baseUrl}/guitars/${guitarId}`,
-      payload
-    );
-  }
-
-  delete(guitarId: number): Observable<Guitar> {
-    return this.http.delete<Guitar>(
-      `${environment.baseUrl}/guitars/${guitarId}`
-    );
+  delete(guitarId: string) {
+    return this.firestore.doc('/Guitars/' + guitarId).delete();
   }
 }

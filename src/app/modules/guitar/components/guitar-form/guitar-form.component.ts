@@ -1,6 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { GuitarService } from '../../services/guitar.service';
 import { Guitar } from '../../utils/models/guitar.interface';
 
@@ -18,7 +19,7 @@ export class GuitarFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private guitarService: GuitarService,
     private router: Router,
-    private route: ActivatedRoute
+    private location: Location
   ) {
     this.guitarService = guitarService;
   }
@@ -26,12 +27,12 @@ export class GuitarFormComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
 
-    const guitarId = this.route.snapshot.paramMap.get('id');
-    this.route.params.subscribe((params) => {
-      if (guitarId) {
-        this.findGuitar(Number(guitarId));
-      }
-    });
+    const state: any = this.location.getState();
+
+    if (state?.data) {
+      this.guitar = state?.data;
+      this.fillForm();
+    }
   }
 
   buildForm() {
@@ -42,13 +43,6 @@ export class GuitarFormComponent implements OnInit {
       description: ['', Validators.required],
       features: ['', Validators.required],
       indicatedLevel: ['', Validators.required],
-    });
-  }
-
-  findGuitar(guitarId: number) {
-    this.guitarService.find(guitarId).subscribe((guitar) => {
-      this.guitar = guitar;
-      this.fillForm();
     });
   }
 
@@ -64,11 +58,11 @@ export class GuitarFormComponent implements OnInit {
       const payload = this.form.value;
 
       if (this.guitar?.id) {
-        this.guitarService.update(payload, this.guitar.id).subscribe(() => {
+        this.guitarService.update(payload, this.guitar.id).then(() => {
           this.router.navigate([`guitarras/`]);
         });
       } else {
-        this.guitarService.create(payload).subscribe(() => {
+        this.guitarService.create(payload).then(() => {
           this.router.navigate([`guitarras/`]);
         });
       }
@@ -85,7 +79,7 @@ export class GuitarFormComponent implements OnInit {
 
   handleDeleteClick() {
     this.dismissModal();
-    this.guitarService.delete(this.guitar?.id).subscribe(() => {
+    this.guitarService.delete(this.guitar?.id).then(() => {
       this.router.navigate([`guitarras/`]);
     });
   }

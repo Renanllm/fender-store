@@ -1,3 +1,4 @@
+import { UserService } from './user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private authService: AuthService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private userService: UserService
   ) {
   }
 
@@ -30,6 +32,7 @@ export class LoginPage implements OnInit {
   };
 
   ngOnInit() {
+    this.userService.logout();
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -37,17 +40,14 @@ export class LoginPage implements OnInit {
   };
 
   async register() {
-    
     const loading = await this.loadingController.create();
     await loading.present();
 
-    console.log(this.form.value);
-    
     const user = await this.authService.register(this.form.value);
     await loading.dismiss();
 
     if (user) {
-      this.router.navigate([`guitarras/`]);
+      document.location.reload();
     } else {
       this.showAlert('Registration failed', 'Please thy again!');
     }
@@ -57,10 +57,12 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
 
-    const user = await this.authService.login(this.form.value);
+    const response = await this.authService.login(this.form.value);
+    this.userService.login(response);
+
     await loading.dismiss();
 
-    if (user) {
+    if (response) {
       this.router.navigate(['guitarras/']);
     } else {
       this.showAlert('Login failed', 'Please thy again!');

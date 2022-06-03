@@ -9,7 +9,7 @@ import { Guitar } from '../../utils/models/guitar.interface';
 })
 export class GuitarItemComponent implements OnInit {
   @Input() guitar: Guitar;
-  @Output() handleGuitarClickEvent = new EventEmitter<number>();
+  @Output() handleGuitarClickEvent = new EventEmitter<string>();
 
   constructor() {}
 

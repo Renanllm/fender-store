@@ -20,7 +20,7 @@
                 <ion-input type="password" formControlName="password" required></ion-input>
             </ion-item>
 
-            <ion-button class="button" full type="submit" color="danger" [disabled]="!loginForm.form.valid">Login</ion-button>
+            <ion-button class="button" full type="submit" color="danger" [disabled]="!loginForm.form.valid" (click)="login()">Login</ion-button>
             <ion-button class="button" full type="submit" color="primary" (click)="register()">Create account</ion-button>
         </form>
     </div>

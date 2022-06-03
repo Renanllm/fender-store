@@ -1,5 +1,7 @@
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UserCredential } from 'firebase/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from './user.interface';
@@ -10,20 +12,25 @@ import { User } from './user.interface';
 export class UserService {
   isUserLoggedSubscription = new BehaviorSubject(this.isUserLogged());
 
-  constructor(private http: HttpClient) {}
+  constructor(private firestore: AngularFirestore) {}
 
-  find({ email, password }): Observable<User[]> {
-    return this.http.get<User[]>(
-      `${environment.baseUrl}/users?email=${email}&password=${password}`
-    );
+  findUsers() {
+    return this.firestore.collection<User>('/users/').valueChanges();
   }
 
-  login(user: User) {
+  login(credentials: UserCredential) {
+    this.findUsers().subscribe(users => {
+      const email = credentials.user.email;
+      const user = users.find(u => u.email === email);
+
+      localStorage.setItem('user', JSON.stringify(user));
+    });
+
     localStorage.setItem(
       'token',
-      btoa(JSON.stringify(`token-to-${user.email}`))
+      JSON.stringify(credentials.user.refreshToken)
     );
-    localStorage.setItem('user', JSON.stringify(user));
+
     this.updateUserLogged();
   }
 

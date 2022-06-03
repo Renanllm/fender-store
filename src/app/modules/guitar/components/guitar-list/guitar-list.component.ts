@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GuitarService } from '../../services/guitar.service';
 import { Guitar } from '../../utils/models/guitar.interface';
 
@@ -14,27 +14,29 @@ export class GuitarListComponent implements OnInit {
   constructor(
     private guitarService: GuitarService,
     private router: Router,
-    private route: ActivatedRoute
   ) {
     this.guitarService = guitarService;
   }
 
   ngOnInit() {
-    this.route.data.subscribe(({ reload }) => {
-      if (reload) {
-        this.findGuitars();
+    this.guitarService.findAllListen().subscribe(res=>{
+      if(res){
+        this.guitars = res.map(e => ({
+            id: e.payload.doc.id,
+            name: e.payload.doc.data().name,
+            type: e.payload.doc.data().type,
+            price: e.payload.doc.data().price,
+            description: e.payload.doc.data().description,
+            features: e.payload.doc.data().features,
+            indicatedLevel: e.payload.doc.data().indicatedLevel
+          }));
       }
     });
   }
 
-  findGuitars() {
-    this.guitarService.findAll().subscribe((guitars) => {
-      this.guitars = guitars;
-    });
-  }
-
-  handleGuitarClick(guitarId: number) {
-    this.router.navigate([`guitarras/form/${guitarId}`]);
+  handleGuitarClick(guitarId: string) {
+    const guitar = this.guitars.find(g => g.id === guitarId);
+    this.router.navigate([`guitarras/form/${guitarId}`], { state: { data: guitar }  });
   }
 
   redirectToCreatePage() {
